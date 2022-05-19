@@ -12,6 +12,7 @@ FastAPI boilerplate
   - `contrib` :  각 프로젝트에서 사용하는 공통 패키지
 - poetry로 패키지 관리
 - `Makefile`로 주요 명령어 관리
+  - 프로젝트 단위로 관리하므로 프로젝트 디렉터리에 존재
 
 
 ### 프로젝트 구성
@@ -23,6 +24,8 @@ FastAPI boilerplate
 
 Scripts
 --------
+
+`projects/hello_graphql/Makefile` 파일을 기반은 명령어들.
 
 ### 패키지 관련
 
@@ -72,9 +75,9 @@ Server Application Settings
 Editor
 -------
 
-- [PyCharm](https://www.jetbrains.com/help/pycharm/poetry.html)
+- [Configure a Poetry environment](https://www.jetbrains.com/help/pycharm/poetry.html) : PyCharm에 Poetry 설정.
 
 참조
 -----
 
-- [fastapi-realworld-example-app](https://github.com/nsidnev/fastapi-realworld-example-app)
+- [fastapi-realworld-example-app](https://github.com/nsidnev/fastapi-realworld-example-app) : 이 Boilerplate 를 만들 때 기반으로 삼은 boilerplate.
