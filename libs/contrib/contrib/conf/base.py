@@ -1,13 +1,10 @@
 import typing as t
-import sys
 import enum
 import logging
 
-from loguru import logger
 from pydantic import BaseSettings as _BaseSettings
 from pydantic import RedisDsn, SecretStr
 
-from ..logging.handlers import InterceptHandler
 from ..types import EnvNameType, DatabaseUrlsType
 
 
@@ -86,11 +83,3 @@ class BaseAppSettings(BaseSettings):
             "title": self.title,
             "version": self.version,
         }
-
-    def configure_logging(self) -> None:
-        logging.getLogger().handlers = [InterceptHandler()]
-        for logger_name in self.loggers:
-            logging_logger = logging.getLogger(logger_name)
-            logging_logger.handlers = [InterceptHandler(level=self.logging_level)]
-
-        logger.configure(handlers=[{"sink": sys.stderr, "level": self.logging_level}])
