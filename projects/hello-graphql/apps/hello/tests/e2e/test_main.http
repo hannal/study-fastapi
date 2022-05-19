@@ -1,0 +1,6 @@
+# https://www.jetbrains.com/help/pycharm/http-client-in-product-code-editor.html#creating-http-request-files
+
+GET http://127.0.0.1:8899/hello
+Accept: application/json
+
+###

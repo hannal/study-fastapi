@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "hello-graphql"
+version = "0.1.0"
+description = ""
+authors = ["Hannal <kay@hannal.net>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+contrib = {path = "../../libs/contrib"}
+fastapi = "^0.78.0"
+uvicorn = {extras = ["standard"], version = "^0.17.6"}
+ujson = "^5.2.0"
+alembic = "^1.7.7"
+SQLAlchemy = "^1.4.36"
+pydantic = {extras = ["dotenv"], version = "^1.9.0"}
+loguru = "^0.6.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
+pytest-asyncio = "^0.18.3"
+pytest-env = "^0.6.2"
+pytest-xdist = "^2.5.0"
+httpx = "^0.22.0"
+asgi-lifespan = "^1.0.1"
+
+[virtualenvs]
+create = true
+in-project = true
+path = ".venv"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.py$'
+exclude = '/(\.venv|venv|\.env|env|migrations)/'
+
+[tool.pytest.ini_options]
+python_files = ["tests.py", "test_*.py"]
+filterwarnings = "error"
+addopts = '''
+  --strict-markers
+  --tb=short
+  --no-cov-on-fail
+  --numprocesses=auto
+  --asyncio-mode=auto
+'''
+env = [
+  "APP_SETTINGS_MODULE=hello_graphql.settings",
+  "APP_ENV_NAME=test"
+]
+
+[tool.coverage.run]
+branch = true
+omit = ["*/tests/*", "*/conftest.py", "*/routes.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 100
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "def __str__",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "if typing.TYPE_CHECKING:"
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.poetry.scripts]
+server = 'main:runserver'
