@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "contrib"
-version = "0.1.9"
+version = "0.1.10"
 description = ""
 authors = ["hannal <kay@hannal.net>"]
 
