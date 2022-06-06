@@ -1,10 +1,15 @@
 FastAPI Study
 ==============
 
-이 저장소 구성.
+좋아요(star), 구독(follow), 알람 설정(watch)까지.
+
+## 0. 차림판
 
 - [FastAPI 스터디](#1-fastapi-스터디)
 - [FastAPI + Poetry Boilerplate](#2-boilerplate)
+
+----
+
 
 ## 1. FastAPI 스터디
 - [스터디 페이지](./projects/tutorial-user-guide)
