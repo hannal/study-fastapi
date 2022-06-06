@@ -1,10 +1,23 @@
-FastAPI boilerplate
-=====================
+FastAPI Study
+==============
 
-구성
------
+이 저장소 구성.
 
-### Boilerplate
+- [FastAPI 스터디](#1-fastapi-스터디)
+- [FastAPI + Poetry Boilerplate](#2-boilerplate)
+
+## 1. FastAPI 스터디
+- [스터디 페이지](./projects/tutorial-user-guide)
+  - [FastAPI 공식 문서 Tutorial user guide 스터디](./projects/tutorial-user-guide)
+  - Mob programming (예정)
+
+----
+
+## 2. Boilerplate
+
+이 저장소와 [projects/hello-graphql](./projects/hello-graphql) 디렉터리가 Boilerplate 구축을 위한 것.
+
+### Boilerplate 구성
 
 - pyproject.toml 기반으로 Python Project 구성
 - monorepo 느낌나게 패키지 분리
