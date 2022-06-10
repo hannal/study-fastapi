@@ -12,8 +12,8 @@ FastAPI Study
 
 
 ## 1. FastAPI 스터디
-- [스터디 페이지](./projects/tutorial-user-guide)
-  - [FastAPI 공식 문서 Tutorial user guide 스터디](./projects/tutorial-user-guide)
+- [스터디 클럽 페이지](./projects/study-club)
+  - [FastAPI 공식 문서 Tutorial user guide 스터디](./projects/study-club)
   - Mob programming (예정)
 
 ----
