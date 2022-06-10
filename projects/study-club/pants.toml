@@ -1,0 +1,76 @@
+[GLOBAL]
+pants_version = "2.11.0"
+backend_packages.add = [
+  # https://www.pantsbuild.org/docs/enabling-backends
+  "pants.backend.python",
+  "pants.backend.python.lint.docformatter",
+  "pants.backend.python.lint.black",
+  "pants.backend.python.lint.flake8",
+  "pants.backend.python.lint.isort",
+  "pants.backend.docker",
+]
+pants_ignore.add = [
+  "notes",
+]
+local_execution_root_dir="%(buildroot)s/.tmp"
+
+
+[anonymous-telemetry]
+enabled = false
+
+[source]
+root_patterns = [
+  "/src",
+  "/",
+]
+#marker_filenames = ["pyproject.toml"]
+
+[poetry]
+version = "poetry>=1.1.13"
+interpreter_constraints = ["CPython>=3.10"]
+
+[python]
+enable_resolves = true
+interpreter_constraints = ["CPython>=3.10"]
+lockfile_generator = "pex"
+default_resolve = "python-default"
+
+[python.resolves]
+python-default = "lockfiles/python/python.lock"
+s01 = 'lockfiles/python/studyclub.s01.lock'
+
+[repl]
+shell = "ipython"
+
+[ipython]
+version = "ipython>=8.4.0"
+lockfile = "lockfiles/python/ipython.lock"
+
+[python-infer]
+inits = true
+
+[python-bootstrap]
+search_path = ["<PYENV>", "<PATH>"]
+
+[pytest]
+version = "pytest>=7.0"
+extra_requirements.add = [
+  "pytest-asyncio==0.18",
+  "pytest-dependency==0.5.1",
+  "pytest-rerunfailures==10.2",
+  "pytest-postgresql==4.1.1",
+  "pytest-mock==3.7.0",
+  "pytest-env==0.6.2",
+  "pytest-cov==3.0.0",
+  "pydevd-pycharm==222.2889.11",  # https://www.pantsbuild.org/docs/python-test-goal#running-tests-interactively
+]
+args = ["-v"]
+lockfile = "lockfiles/python/pytest.lock"
+
+[flake8]
+version = "flake8>=4.0"
+extra_requirements.add = [
+    "flake8-commas>=2.1",
+    "setuptools>=60.0",
+]
+lockfile = "lockfiles/python/flake8.lock"

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "s01"
+version = "0.1.0"
+description = "FastAPI StudyClub season 1"
+authors = [
+    "Hannal <kay@hannal.net>",
+    "Kay Cha <k.cha@iamdt.co.kr>",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "~2.28.0"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.py4$'
+exclude = '/(\.venv|venv|\.env|env|migrations)/'

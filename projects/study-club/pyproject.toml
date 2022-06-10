@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "fastapi-studyclub"
+version = "1.1.0"
+description = "FastAPI StudyClub projects"
+authors = [
+    "Hannal <kay@hannal.net>",
+    "Kay Cha <k.cha@iamdt.co.kr>",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = { extras = ["dotenv"], version = "~1.9.1"}
+fastapi = "~0.78.0"
+uvicorn = { extras = ["standard"], version = "~0.17.6"}
+httpx = "~0.23.0"
+
+[tool.poetry.dev-dependencies]
+factory-boy = "~3.2.1"
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+python_files = ["tests.py", "test_*.py"]
+addopts = '''
+  --strict-markers
+  --tb=short
+  --no-cov-on-fail
+  --asyncio-mode=auto
+'''
+env = [
+  "APP_ENV_NAME=test"
+]
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning:etcd3.*:",
+]
+asyncio_mode = "auto"
