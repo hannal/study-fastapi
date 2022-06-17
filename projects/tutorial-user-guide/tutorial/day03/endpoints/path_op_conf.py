@@ -25,6 +25,13 @@ async def _unserialize_item(request: Request):
 
 
 @app.post(
+    "/items2/",
+    response_model=Item,
+    name="create_item_with_file2",
+    status_code=status.HTTP_200_OK,
+    tags=[Tag.ITEMS],
+)
+@app.post(
     "/items/",
     response_model=Item,
     name="create_item_with_file",

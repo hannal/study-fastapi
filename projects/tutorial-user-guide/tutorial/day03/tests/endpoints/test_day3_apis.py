@@ -54,10 +54,19 @@ async def test_create_file(
     assert res.status_code == expected_status
 
 
+@pytest_parametrize(
+    "url_name, expected_status",
+    [
+        ["create_item_with_file", status.HTTP_201_CREATED],
+        ["create_item_with_file2", status.HTTP_200_OK],
+    ],
+)
 def test_create_item_with_file(
     app: FastAPI,
     client: TestClient,
     upload_file,
+    url_name,
+    expected_status,
 ):
     payload = {
         "item": {
@@ -70,10 +79,12 @@ def test_create_item_with_file(
     }
     files = {
         "file": upload_file,
-        "item": (None, json.dumps(payload["item"]), "application/json"),
+        "item": (
+            None,
+            json.dumps(payload["item"]),
+        ),
     }
-    url_name = "create_item_with_file"
     res = client.post(app.url_path_for(url_name), files=files)
     data = res.json()
-    assert res.status_code == status.HTTP_201_CREATED
+    assert res.status_code == expected_status
     assert data["description"] in upload_file.name
