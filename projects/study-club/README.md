@@ -34,5 +34,6 @@ FastAPI 스터디
 - [gittestsite2](https://github.com/gittestsite2/fastapi_study)
 - [hannal](https://github.com/hannal/study-fastapi)
 - [iamdt-juyong](https://github.com/iamdt-juyong/study-fastapi)
+- [ohdowon064](https://github.com/ohdowon064/fastapi-study)
 - [raccoonyy](https://github.com/raccoonyy/fastapi-study)
 - [s3ungw00n](https://github.com/s3ungw00n/fastapi_study)
