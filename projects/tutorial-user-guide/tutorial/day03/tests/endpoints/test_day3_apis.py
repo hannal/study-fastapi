@@ -1,7 +1,9 @@
+import json
 from pathlib import Path
 
 import pytest
 from fastapi import FastAPI, status
+from fastapi.testclient import TestClient
 from httpx import AsyncClient
 
 from contrib.testing.decorators import pytest_async, pytest_parametrize
@@ -49,5 +51,29 @@ async def test_create_file(
         "file": upload_file,
     }
     res = await client.post(app.url_path_for(url_name), files=files)
-    res.request.read()
     assert res.status_code == expected_status
+
+
+def test_create_item_with_file(
+    app: FastAPI,
+    client: TestClient,
+    upload_file,
+):
+    payload = {
+        "item": {
+            "name": "Hannal",
+            "description": "Lorem Ipsum",
+            "price": 100_000.0,
+            "tax": 10.0,
+            "tags": ["Tag1", "Tag2"],
+        },
+    }
+    files = {
+        "file": upload_file,
+        "item": (None, json.dumps(payload["item"]), "application/json"),
+    }
+    url_name = "create_item_with_file"
+    res = client.post(app.url_path_for(url_name), files=files)
+    data = res.json()
+    assert res.status_code == status.HTTP_201_CREATED
+    assert data["description"] in upload_file.name
