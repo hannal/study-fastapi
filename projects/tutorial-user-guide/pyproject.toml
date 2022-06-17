@@ -15,6 +15,7 @@ SQLAlchemy = "^1.4.36"
 pydantic = {extras = ["dotenv"], version = "^1.9.0"}
 strawberry-graphql = {extras = ["fastapi"], version = "^0.113.0"}
 python-multipart = "^0.0.5"
+requests = "^2.28.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"

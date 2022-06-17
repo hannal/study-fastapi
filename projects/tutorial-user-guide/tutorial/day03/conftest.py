@@ -1,6 +1,7 @@
 import pytest
 from asgi_lifespan import LifespanManager
 from fastapi import FastAPI
+from fastapi.testclient import TestClient
 from httpx import AsyncClient
 
 
@@ -19,7 +20,16 @@ async def initialized_app(app: FastAPI) -> FastAPI:
 
 
 @pytest.fixture
-async def client(initialized_app: FastAPI) -> AsyncClient:
+def client(initialized_app: FastAPI) -> TestClient:
+    with TestClient(
+        app=initialized_app,
+        base_url="http://testserver",
+    ) as client:
+        yield client
+
+
+@pytest.fixture
+async def async_client(initialized_app: FastAPI) -> AsyncClient:
     async with AsyncClient(
         app=initialized_app,
         base_url="http://testserver",
