@@ -8,7 +8,7 @@ from contrib.testing.decorators import pytest_async, pytest_parametrize
 
 
 @pytest.fixture
-async def client(initialized_app: FastAPI) -> AsyncClient:
+async def client_for_uploading(initialized_app: FastAPI) -> AsyncClient:
     async with AsyncClient(
         app=initialized_app,
         base_url="http://day03.testserver",
@@ -39,11 +39,12 @@ def upload_file():
 @pytest_async
 async def test_create_file(
     app: FastAPI,
-    client: AsyncClient,
+    client_for_uploading: AsyncClient,
     upload_file,
     url_name,
     expected_status,
 ):
+    client = client_for_uploading
     files = {
         "file": upload_file,
     }
