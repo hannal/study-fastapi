@@ -6,6 +6,7 @@ from ..app import app
 @app.post(
     "/files/",
     name="create_file",
+    tags=["upload_files"],
     status_code=status.HTTP_201_CREATED,
 )
 async def create_file(file: bytes = File(...)):
@@ -15,6 +16,7 @@ async def create_file(file: bytes = File(...)):
 @app.post(
     "/uploadfile/",
     name="create_upload_file",
+    tags=["upload_files"],
     status_code=status.HTTP_201_CREATED,
 )
 async def create_upload_file(file: UploadFile = File(...)):
