@@ -8,6 +8,7 @@ from fastapi import FastAPI
 __all__ = [
     "create_app",
     "setup_routes",
+    "setup_error_handlers",
     "app",
     "app_day03",
 ]
@@ -22,6 +23,10 @@ def create_app(*args, **kwargs):
 
 
 def setup_routes(routes_namespace: str):
+    import_module(routes_namespace)
+
+
+def setup_error_handlers(routes_namespace: str):
     import_module(routes_namespace)
 
 

@@ -8,6 +8,9 @@ from httpx import AsyncClient
 
 from contrib.testing.decorators import pytest_async, pytest_parametrize
 
+from tutorial.exceptions import BaseHttpTeapotError
+from tutorial.day03.handlers.error import Day03CustomError
+
 
 @pytest.fixture
 async def client_for_uploading(initialized_app: FastAPI) -> AsyncClient:
@@ -106,3 +109,30 @@ def test_404_error(
     url_name = "read_item_for_404_error"
     res = client.get(app.url_path_for(url_name, item_id=item_id))
     assert res.status_code == expected_status
+    if expected_status == status.HTTP_404_NOT_FOUND:
+        data = res.json()
+        assert data["custom_field"] == "not-found"
+
+
+@pytest_parametrize(
+    "url_name, expected_status, expected_detail",
+    [
+        ["day03_teapot_error", Day03CustomError.status_code, Day03CustomError.detail],
+        [
+            "base_teapot_error",
+            BaseHttpTeapotError.status_code,
+            BaseHttpTeapotError.detail,
+        ],
+    ],
+)
+def test_teapot_error(
+    app: FastAPI,
+    client: TestClient,
+    url_name,
+    expected_status,
+    expected_detail,
+):
+    res = client.get(app.url_path_for(url_name))
+    assert res.status_code == expected_status
+    data = res.json()
+    assert data["message"] == expected_detail

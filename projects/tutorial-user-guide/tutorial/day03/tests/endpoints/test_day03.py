@@ -3,8 +3,10 @@ from pathlib import Path
 import pytest
 from fastapi import UploadFile, HTTPException, status
 
+from tutorial.exceptions import BaseHttpTeapotError
 from tutorial.day03.endpoints import path_op_conf
 from tutorial.day03.endpoints import handling_errors
+from tutorial.day03.handlers.error import Day03CustomError
 
 
 @pytest.fixture
@@ -31,3 +33,10 @@ async def test_404_error():
         await handling_errors.read_item("invalid")
 
     assert exc.value.status_code == status.HTTP_404_NOT_FOUND
+
+
+@pytest.mark.anyio
+async def test_teapot_error():
+    with pytest.raises(BaseHttpTeapotError) as exc:
+        await handling_errors.day03_teapot_error()
+    assert isinstance(exc.value, Day03CustomError)
