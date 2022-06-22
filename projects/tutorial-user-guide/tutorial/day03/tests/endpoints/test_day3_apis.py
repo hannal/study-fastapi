@@ -88,3 +88,21 @@ def test_create_item_with_file(
     data = res.json()
     assert res.status_code == expected_status
     assert data["description"] in upload_file.name
+
+
+@pytest_parametrize(
+    "item_id, expected_status",
+    [
+        ["foo", status.HTTP_200_OK],
+        ["-invalid-", status.HTTP_404_NOT_FOUND],
+    ],
+)
+def test_404_error(
+    app: FastAPI,
+    client: TestClient,
+    item_id,
+    expected_status,
+):
+    url_name = "read_item_for_404_error"
+    res = client.get(app.url_path_for(url_name, item_id=item_id))
+    assert res.status_code == expected_status
